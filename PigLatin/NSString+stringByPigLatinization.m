@@ -41,21 +41,35 @@
 
 - (NSString *)stringByPigLatinization{
     
+    NSString *originalString = self;
+    NSMutableString *str = [[NSMutableString alloc] init];
+
     
-    //for(j = 0; j < [)
-    
+    for(int j = 0; j < [originalString length]; j++){
+        
+        char oneLetter = [originalString characterAtIndex:j];
+        
+        if(oneLetter != ' '){
+            NSString *oneLetterString = [NSString stringWithFormat:@"%c", oneLetter];
+            [str appendString:oneLetterString];
+        }
+    }
     
     
     NSMutableString *pigString = [[NSMutableString alloc] init];
     NSMutableString *startingConsonantString = [[NSMutableString alloc] init];
     NSString *tempString = self;
+    
+    tempString = str; // jason
     [tempString lowercaseString];
+    
+
     
     char c = [tempString characterAtIndex:0];
     
     // simply append "ay" to strings that begin with vowels
     if((c == 'a') || (c == 'e') || (c == 'i') || (c == 'o') || (c == 'u')){
-        pigString = [[NSMutableString alloc] initWithString:self];
+        pigString = [[NSMutableString alloc] initWithString:tempString];
         [pigString appendString:@"ay"];
         return pigString;
     }
